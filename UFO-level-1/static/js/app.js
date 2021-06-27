@@ -8,29 +8,43 @@ var tableData = data;
 var tbody = d3.select("tbody");
 
 
+//
+function UFOData(data) {
+  var tbody = d3.select("tbody");
 
-data.forEach((UFOReport) => {
-  var row = tbody.append("tr");
-  Object.entries(UFOReport).forEach(([key, value]) => {
-    var cell = row.append("td");
-    cell.text(value);
-  });
-});
-
- 
-
-
-/* function UFOReport(data) {
-  data.forEach((UFOReport) => {
+  for (var i = 0; i < data.length; i++) {
     var row = tbody.append("tr");
-    Object.entries(UFOReport).forEach(([key, value]) => {
-      var cell = row.append("td");
-      cell.text(value);
-    });
-});
+    ufoEvent = Object.values(data[i]);
 
- */
+    row.append("td").text(ufoEvent[0]);
+    row.append("td").text(ufoEvent[1].toUpperCase());
+    row.append("td").text(ufoEvent[2].toUpperCase());
+    row.append("td").text(ufoEvent[3].toUpperCase());
+    row.append("td").text(ufoEvent[4].toUpperCase());
+    row.append("td").text(ufoEvent[5]);
+    row.append("td").text(ufoEvent[6]);
 
+  };
+
+};
+
+UFOData(tableData);
+
+//Reset Buttons
+
+var resetButton = d3.select("#reset-btn")
+resetButton.on("click",cleanTable);
+function cleanTable() {
+  var tbody = d3.select("tbody");
+  // Cleans the table
+  tbody.html("");
+
+
+
+  //Recalls the Original Data
+  UFOData(tableData)
+
+}
 
 var button = d3.select("#filter-btn");
 
@@ -41,7 +55,6 @@ var form = d3.select("#form");
 button.on("click", runEnter);
 form.on("submit", runEnter);
 
-console.log(button)
 
 // Complete the event handler function for the form
 function runEnter() {
@@ -83,14 +96,7 @@ function runEnter() {
   list.html("");
 
   // Filter Data
-
-  filteredData.forEach((UFOReport) => {
-    var row = tbody.append("tr");
-    Object.entries(UFOReport).forEach(([key, value]) => {
-      var cell = row.append("td");
-      cell.text(value);
-    });
-  });
+  UFOData(filteredData);
 
 
 };

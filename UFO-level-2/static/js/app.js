@@ -2,12 +2,6 @@
 var tableData = data;
 
 
-
-
-
-
-
-
 //
 function UFOData(data) {
   var tbody = d3.select("tbody");
@@ -16,14 +10,13 @@ function UFOData(data) {
     var row = tbody.append("tr");
     ufoEvent = Object.values(data[i]);
 
-    // 
-    dateEvent = row.append("td").text(ufoEvent[0]);
-    cityEvent = row.append("td").text(ufoEvent[1].toUpperCase());
-    stateEvent = row.append("td").text(ufoEvent[2].toUpperCase()); 
-    countryEvent = row.append("td").text(ufoEvent[3].toUpperCase());  
-    shapeEvent = row.append("td").text(ufoEvent[4].toUpperCase()); 
-    durationEvent = row.append("td").text(ufoEvent[5]); 
-    commentsEvent = row.append("td").text(ufoEvent[6]); 
+    row.append("td").text(ufoEvent[0]);
+    row.append("td").text(ufoEvent[1].toUpperCase());
+    row.append("td").text(ufoEvent[2].toUpperCase());
+    row.append("td").text(ufoEvent[3].toUpperCase());
+    row.append("td").text(ufoEvent[4].toUpperCase());
+    row.append("td").text(ufoEvent[5]);
+    row.append("td").text(ufoEvent[6]);
 
   };
 
@@ -37,6 +30,7 @@ var unique = (value, index, self) => {
   return self.indexOf(value) === index
 };
 
+//Creates the Filters of the Unique Value for each column
 var filterDate = d3.select("#datetimeFilter");
 var dates = tableData.map(tableData => tableData.datetime).filter(unique).sort();
 
@@ -52,16 +46,6 @@ var country = tableData.map(tableData => tableData.country.toUpperCase()).filter
 
 var filterShape = d3.select('#shapeFilter');
 var shape = tableData.map(tableData => tableData.shape).filter(unique).sort();
-
-
-// console.log(dates);
-// console.log(city);
-// console.log(state);
-// console.log(country);
-// console.log(shape);
-
-
-
 
 
 dates.forEach(date => {
@@ -86,14 +70,33 @@ shape.forEach(shape => {
 });
 
 
-var button = d3.select("#filter-btn");
+// var button = d3.select("#filter-btn");
+var resetButton = d3.select("#reset-btn")
 
-// Select the form
-var form = d3.select("#form");
+//Filter handler
+d3.selectAll("select").on("change",runEnter);
+resetButton.on("click",cleanTable);
 
-// Create event handlers 
-button.on("click", runEnter);
-form.on("submit", runEnter);
+
+
+
+function cleanTable() {
+  var tbody = d3.select("tbody");
+  // Cleans the table
+  tbody.html("");
+
+
+  d3.select("#datetimeFilter").property('value',"");
+  d3.select("#cityFilter").property("value","");
+  d3.select("#stateFilter").property("value","");
+  d3.select("#countryFilter").property("value","");
+  d3.select("#shapeFilter").property("value","");
+
+
+  //Recalls the Original Data
+  UFOData(tableData)
+
+}
 
 
 // Complete the event handler function for the form
@@ -103,15 +106,21 @@ function runEnter() {
   d3.event.preventDefault();
 
   // Select the input element and get the raw HTML node
-  var inputElement = d3.select("#datetimeFilter");
+  var inputDate = d3.select("#datetimeFilter").property("value");
+  var inputCity = d3.select("#cityFilter").property("value");
+  var inputState = d3.select("#stateFilter").property("value");
+  var inputCountry = d3.select("#countryFilter").property("value");
+  var inputShape = d3.select("#shapeFilter").property("value");
 
-  // Get the value property of the input element
-  var inputValue = inputElement.property("value");
+  var filteredData = tableData.filter(tableData =>
+    (tableData.datetime === inputDate || !inputDate)
+    && (tableData.city.toUpperCase() === inputCity || !inputCity)
+    && (tableData.state.toUpperCase() === inputState || !inputState)
+    && (tableData.country.toUpperCase() === inputCountry || !inputCountry)
+    && (tableData.shape === inputShape || !inputShape)
 
-  var filteredData = tableData.filter(tableData => tableData.datetime === inputValue);
 
-  // console.log(filteredData);
-
+  );
 
   // // Then, select the unordered list element by class name
   var list = d3.select("#ufo-table-body");
