@@ -7,5 +7,9 @@ That's why we are hiring you. We need you to write code that will create a table
 You can handle this... right? The planet Earth needs to know what we have found!
 
 <img src="Images/Screen Shot 2021-06-26 at 20.44.28.png"
-     alt="Markdown Monster icon"
+     alt="MultipleFilter"
+     style="float: left; margin-right: 10px;" />
+
+<img src="Images/Screen Shot 2021-06-26 at 20.45.55.png"
+     alt="SingleFilter"
      style="float: left; margin-right: 10px;" />
