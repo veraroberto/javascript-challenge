@@ -8,6 +8,7 @@ var tableData = data;
 var tbody = d3.select("tbody");
 
 
+
 data.forEach((UFOReport) => {
   var row = tbody.append("tr");
   Object.entries(UFOReport).forEach(([key, value]) => {
@@ -16,8 +17,19 @@ data.forEach((UFOReport) => {
   });
 });
 
+ 
 
 
+/* function UFOReport(data) {
+  data.forEach((UFOReport) => {
+    var row = tbody.append("tr");
+    Object.entries(UFOReport).forEach(([key, value]) => {
+      var cell = row.append("td");
+      cell.text(value);
+    });
+});
+
+ */
 
 
 var button = d3.select("#filter-btn");
