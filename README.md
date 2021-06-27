@@ -6,5 +6,6 @@ There is just one tiny problem though... our collection is too large to search t
 That's why we are hiring you. We need you to write code that will create a table dynamically based upon a dataset we provide. We also need to allow our users to filter the table data for specific values. There's a catch though... we only use pure JavaScript, HTML, and CSS, and D3.js on our web pages. They are the only coding languages which can be trusted.
 You can handle this... right? The planet Earth needs to know what we have found!
 
-/Users/robertovera/Google Drive/BootCamp/REPO/javascript-challenge/Images/Screen Shot 2021-06-26 at 20.44.28.png
-/Users/robertovera/Google Drive/BootCamp/REPO/javascript-challenge/Images/Screen Shot 2021-06-26 at 20.45.55.png
+<img src="Images/Screen Shot 2021-06-26 at 20.44.28.png"
+     alt="Markdown Monster icon"
+     style="float: left; margin-right: 10px;" />
